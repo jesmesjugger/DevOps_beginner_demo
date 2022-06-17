@@ -19,11 +19,6 @@ phases:
     commands:
        - echo build started successfully on $(date)
        - npm install
-  post_build:
-    commands:
-       - npm run build
-       - echo packaging production ready artifacts
-
 artifacts:
   files:
      - '**/*'
