@@ -26,7 +26,5 @@ phases:
 
 artifacts:
   files:
-     - scripts/*
-     - dist/**/*
-     - appspec.yml
+     - '**/*'
   name: devops-master-$(date +%Y-%m-%d)
