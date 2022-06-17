@@ -40,7 +40,7 @@ resource "aws_instance" "web" {
   instance_type = "t3.medium"
   key_name = "winkey"
   user_data = file("install_codedeploy.sh")
-  security_groups =  [aws_security_group.sg.id]
+  vpc_security_group_ids =  [aws_security_group.sg.id]
 
   tags = {
     Name = "DevOps"
