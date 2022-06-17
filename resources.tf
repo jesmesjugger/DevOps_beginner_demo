@@ -40,7 +40,7 @@ resource "aws_instance" "web" {
   instance_type = "t3.medium"
   key_name = "winkey"
   user_data = file("install_codedeploy.sh")
-  security_groups =  [aws_security_group.sg.id]
+  vpc_security_group_ids =  [aws_security_group.sg.id]
 
   tags = {
     Name = "DevOps"
@@ -53,7 +53,7 @@ resource "aws_lb" "front_end" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.sg.id]
-  subnets            = ["subnet-0e9227a33562c04cc","subnet-084e7b7ca96ee2612", "subnet-05cab79385a6dcc99"]
+  subnets            = [var.subnets[0], var.subnets[1], var.subnets[2]]
 
   enable_deletion_protection = true
 
@@ -66,7 +66,7 @@ resource "aws_lb_target_group" "front_end" {
   name     = "frontend"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = "vpc-0a9a3e21dd5eb0dd8"
+  vpc_id   = var.vpc_id
 }
 
 resource "aws_lb_target_group_attachment" "front_end" {
